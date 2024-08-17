@@ -12,29 +12,50 @@ class TasksDB {
   "id" INTEGER NOT NULL,
   "title" TEXT NOT NULL,
   "description" TEXT NOT NULL,
-  "isDone" INTEGER NOT NULL,
    PRIMARY KEY("id" AUTOINCREMENT)
     );""",
     );
   }
 
-  Future<int> createTask({required Task task}) async {
+  Future<Task> createTask({required Task task}) async {
     final database = await TasksDatabaseService().database;
-    return await database.rawInsert(
-      '''INSERT INTO $tableName (title, description, isDone) VALUES (?,?,?)''',
-      [
-        task.title,
-        task.description,
-        task.isDone
-      ],
-    );
+    await database.insert(tableName, task.toMap());
+    return task;
   }
 
   Future<List<Task>> getAllTasks() async {
     final database = await TasksDatabaseService().database;
-    final task = await database.rawQuery(
+    final tasks = await database.rawQuery(
       '''SELECT * from $tableName''',
     );
-    return task.map((task) => Task.fromMap(task)).toList();
+    return tasks.map((task) => Task.fromMap(task)).toList();
+  }
+
+  Future<int> deleteTask(int id) async {
+    final database = await TasksDatabaseService().database;
+    return await database.delete(
+      tableName,
+      where: 'id = ?',
+      whereArgs: [
+        id
+      ],
+    );
+  }
+
+  Future<int> updateTask(Task task) async {
+    final database = await TasksDatabaseService().database;
+    return await database.update(
+      tableName,
+      task.toMap(),
+      where: 'id = ?',
+      whereArgs: [
+        task.id
+      ],
+    );
+  }
+
+  Future<void> clearTable() async {
+    final database = await TasksDatabaseService().database;
+    await database.execute('DELETE FROM $tableName');
   }
 }

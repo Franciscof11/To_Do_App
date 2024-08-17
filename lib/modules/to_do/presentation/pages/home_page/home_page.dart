@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:to_do_app/config/database/tasks/tasks_db.dart';
 import 'package:to_do_app/modules/to_do/domain/task.dart';
 import 'package:to_do_app/modules/to_do/presentation/widgets/my_heat_map.dart';
 import 'package:to_do_app/modules/to_do/presentation/widgets/task_list_tile.dart';
@@ -29,7 +30,24 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(right: 30),
         child: FloatingActionButton(
-          onPressed: () => (),
+          onPressed: () async {
+            final db = TasksDB();
+
+            await db.createTask(
+              task: Task(
+                id: 0,
+                title: 'ablu',
+                isDone: 0,
+                description: 'testando',
+              ),
+            );
+
+            final tasks = await db.getAllTasks();
+
+            for (var x in tasks) {
+              print(x.toString());
+            }
+          },
           backgroundColor: Theme.of(context).colorScheme.tertiary,
           child: Icon(
             Icons.add,
@@ -91,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                   task: Task(
                     id: 1,
                     title: 'Do laundry',
-                    isDone: false,
+                    isDone: 0,
                     description: 'Have to do laundry',
                   ),
                 ),

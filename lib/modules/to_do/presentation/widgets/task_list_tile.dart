@@ -12,6 +12,7 @@ class TaskListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final taskIsDone = task.isDone == 0 ? false : true;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 25),
       child: Slidable(
@@ -21,7 +22,7 @@ class TaskListTile extends StatelessWidget {
             // Edit Option
             SlidableAction(
               onPressed: (context) {},
-              backgroundColor: Colors.grey.shade800,
+              backgroundColor: const Color.fromARGB(255, 66, 66, 66),
               icon: Icons.edit,
               borderRadius: BorderRadius.circular(8),
             ),
@@ -41,7 +42,7 @@ class TaskListTile extends StatelessWidget {
             padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(12)),
-              color: task.isDone ? Colors.green : Theme.of(context).colorScheme.secondary,
+              color: taskIsDone ? Colors.green : Theme.of(context).colorScheme.secondary,
             ),
             child: ListTile(
               title: Text(
@@ -52,7 +53,7 @@ class TaskListTile extends StatelessWidget {
               ),
               trailing: Checkbox(
                 activeColor: Theme.of(context).colorScheme.inversePrimary,
-                value: task.isDone,
+                value: taskIsDone,
                 onChanged: (value) {},
               ),
             ),

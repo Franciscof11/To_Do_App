@@ -4,7 +4,7 @@ class Task {
   final int id;
   final String title;
   final String description;
-  final bool isDone;
+  final int isDone;
   Task({
     required this.id,
     required this.title,
@@ -15,7 +15,7 @@ class Task {
   Task copyWith({
     int? id,
     String? title,
-    bool? isDone,
+    int? isDone,
     String? description,
   }) {
     return Task(
@@ -49,7 +49,7 @@ class Task {
     return Task(
       id: map['id']?.toInt() ?? 0,
       title: map['title'] ?? '',
-      isDone: map['isDone'] ?? false,
+      isDone: map['isDone'] ?? 0,
       description: map['description'] ?? false,
     );
   }

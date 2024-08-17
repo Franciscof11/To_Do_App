@@ -3,9 +3,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do_app/modules/to_do/domain/task.dart';
 
-class HabitListTile extends StatelessWidget {
+class TaskListTile extends StatelessWidget {
   final Task task;
-  const HabitListTile({
+  const TaskListTile({
     super.key,
     required this.task,
   });

@@ -3,31 +3,44 @@ import 'dart:convert';
 class Task {
   final int id;
   final String title;
+  final String description;
   final bool isDone;
   Task({
     required this.id,
     required this.title,
     required this.isDone,
+    required this.description,
   });
 
   Task copyWith({
     int? id,
     String? title,
     bool? isDone,
+    String? description,
   }) {
     return Task(
       id: id ?? this.id,
       title: title ?? this.title,
       isDone: isDone ?? this.isDone,
+      description: description ?? this.description,
     );
   }
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
 
-    result.addAll({'id': id});
-    result.addAll({'title': title});
-    result.addAll({'isDone': isDone});
+    result.addAll({
+      'id': id
+    });
+    result.addAll({
+      'title': title
+    });
+    result.addAll({
+      'isDone': isDone
+    });
+    result.addAll({
+      'description': description
+    });
 
     return result;
   }
@@ -37,6 +50,7 @@ class Task {
       id: map['id']?.toInt() ?? 0,
       title: map['title'] ?? '',
       isDone: map['isDone'] ?? false,
+      description: map['description'] ?? false,
     );
   }
 
@@ -45,5 +59,5 @@ class Task {
   factory Task.fromJson(String source) => Task.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Task(id: $id, title: $title, isDone: $isDone)';
+  String toString() => 'Task(id: $id, title: $title, isDone: $isDone, description: $description)';
 }

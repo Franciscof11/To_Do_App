@@ -12,6 +12,7 @@ class TasksDB {
   "id" INTEGER NOT NULL,
   "title" TEXT NOT NULL,
   "description" TEXT NOT NULL,
+  "status" INTEGER NOT NULL,
    PRIMARY KEY("id" AUTOINCREMENT)
     );""",
     );
@@ -31,7 +32,7 @@ class TasksDB {
     return tasks.map((task) => Task.fromMap(task)).toList();
   }
 
-  Future<int> deleteTask(int id) async {
+  Future<int> deleteTask({required int id}) async {
     final database = await TasksDatabaseService().database;
     return await database.delete(
       tableName,
@@ -42,7 +43,7 @@ class TasksDB {
     );
   }
 
-  Future<int> updateTask(Task task) async {
+  Future<int> updateTask({required Task task}) async {
     final database = await TasksDatabaseService().database;
     return await database.update(
       tableName,

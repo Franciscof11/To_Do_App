@@ -12,7 +12,7 @@ class TaskListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final taskIsDone = task.isDone == 0 ? false : true;
+    final taskIsDone = task.status == 0 ? false : true;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 25),
       child: Slidable(

@@ -16,8 +16,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    List<Task> tasks1 = <Task>[];
-
     Map<DateTime, int>? dataset = {
       DateTime(2024, DateTime.august, 10): 1,
       DateTime(2024, DateTime.august, 13): 2,
@@ -35,10 +33,9 @@ class _HomePageState extends State<HomePage> {
 
             await db.createTask(
               task: Task(
-                id: 0,
-                title: 'ablu',
-                isDone: 0,
-                description: 'testando',
+                title: 'Chico',
+                status: 0,
+                description: 'e',
               ),
             );
 
@@ -109,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                   task: Task(
                     id: 1,
                     title: 'Do laundry',
-                    isDone: 0,
+                    status: 0,
                     description: 'Have to do laundry',
                   ),
                 ),

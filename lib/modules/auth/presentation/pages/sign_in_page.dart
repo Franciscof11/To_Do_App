@@ -4,7 +4,7 @@ import 'package:to_do_app/modules/auth/data/auth_repository.dart';
 import 'package:to_do_app/modules/auth/presentation/pages/sign_up_page.dart';
 import 'package:to_do_app/modules/auth/presentation/widgets/apple_sign_in_button.dart';
 import 'package:to_do_app/modules/auth/presentation/widgets/google_sign_in_button.dart';
-import 'package:to_do_app/utils/custom_text_form_field.dart';
+import 'package:to_do_app/utils/custom_text_field.dart';
 import 'package:to_do_app/utils/remove_glow_effect.dart';
 
 class SignInPage extends StatefulWidget {
@@ -48,9 +48,9 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                   const SizedBox(height: 26),
-                  CustomTextFormField(label: 'Email', controller: emailController),
+                  CustomTextField(label: 'Email', controller: emailController),
                   const SizedBox(height: 16),
-                  CustomTextFormField(label: 'Password', isSecret: true, controller: passwordController),
+                  CustomTextField(label: 'Password', isSecret: true, controller: passwordController),
                   const SizedBox(height: 10),
                   Align(
                     alignment: Alignment.centerRight,

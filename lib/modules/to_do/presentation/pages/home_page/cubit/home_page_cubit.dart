@@ -29,4 +29,22 @@ class HomePageCubit extends Cubit<HomePageState> {
       emit(HomePageState.error(message: 'Error! $e'));
     }
   }
+
+  Future<void> createTask({required Task task}) async {
+    try {
+      emit(const HomePageState.loading());
+
+      await _repository.createTask(task: task);
+
+      final tasks = await _repository.getAllTasks();
+
+      emit(HomePageState.data(tasks: tasks));
+    } catch (e) {
+      log(
+        'Error! $e',
+        error: e,
+      );
+      emit(HomePageState.error(message: 'Error! $e'));
+    }
+  }
 }

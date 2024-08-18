@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do_app/modules/auth/data/auth_repository.dart';
 import 'package:to_do_app/modules/auth/presentation/pages/sign_in_page.dart';
-import 'package:to_do_app/utils/custom_text_form_field.dart';
+import 'package:to_do_app/utils/custom_text_field.dart';
 import 'package:to_do_app/utils/remove_glow_effect.dart';
 
 import '../widgets/apple_sign_in_button.dart';
@@ -50,18 +50,18 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                   const SizedBox(height: 26),
-                  CustomTextFormField(
+                  CustomTextField(
                     label: 'Email',
                     controller: emailSignUpController,
                   ),
                   const SizedBox(height: 16),
-                  CustomTextFormField(
+                  CustomTextField(
                     label: 'Password',
                     isSecret: true,
                     controller: passwordSignUpController,
                   ),
                   const SizedBox(height: 16),
-                  CustomTextFormField(
+                  CustomTextField(
                     label: 'Confirm password',
                     isSecret: true,
                     controller: confirmPassword,

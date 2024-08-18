@@ -15,12 +15,9 @@ class AuthRepository {
       builder: (context, snapshot) {
         // usuário logado
         if (snapshot.hasData) {
-          return RepositoryProvider(
-            create: (context) => TasksDB(),
-            child: BlocProvider(
-              create: (context) => HomePageCubit(repository: context.read<TasksDB>())..getAllTasks(),
-              child: const HomePage(),
-            ),
+          return BlocProvider(
+            create: (context) => HomePageCubit(repository: context.read<TasksDB>())..getAllTasks(),
+            child: const HomePage(),
           );
         }
         // usuário não está  logado

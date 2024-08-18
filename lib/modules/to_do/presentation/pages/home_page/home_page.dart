@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:to_do_app/config/database/tasks/tasks_db.dart';
 import 'package:to_do_app/modules/to_do/domain/task.dart';
+import 'package:to_do_app/modules/to_do/presentation/pages/create_task_page/create_task_page.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/home_page/cubit/home_page_cubit.dart';
 import 'package:to_do_app/modules/to_do/presentation/widgets/loader.dart';
 import 'package:to_do_app/modules/to_do/presentation/widgets/my_heat_map.dart';
@@ -32,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.only(right: 30),
         child: FloatingActionButton(
           onPressed: () async {
-            final db = TasksDB();
+            /*      final db = TasksDB();
 
             await db.createTask(
               task: Task(
@@ -48,7 +50,22 @@ class _HomePageState extends State<HomePage> {
 
             for (var x in tasks) {
               print(x.toString());
-            }
+            } */
+
+/*             final db = TasksDB();
+
+            await db.clearTable();
+ */
+            Navigator.push(
+              context,
+              PageTransition(
+                child: BlocProvider(
+                  create: (context) => HomePageCubit(repository: context.read<TasksDB>()),
+                  child: const CreateTaskPage(),
+                ),
+                type: PageTransitionType.rightToLeft,
+              ),
+            );
           },
           backgroundColor: Theme.of(context).colorScheme.tertiary,
           child: Icon(

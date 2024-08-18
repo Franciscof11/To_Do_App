@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:to_do_app/config/database/tasks/tasks_db.dart';
 import 'package:to_do_app/modules/auth/presentation/pages/sign_in_page.dart';
+import 'package:to_do_app/modules/to_do/presentation/pages/home_page/cubit/home_page_cubit.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/home_page/home_page.dart';
 
 class AuthRepository {
@@ -12,7 +15,10 @@ class AuthRepository {
       builder: (context, snapshot) {
         // usuário logado
         if (snapshot.hasData) {
-          return const HomePage();
+          return BlocProvider(
+            create: (context) => HomePageCubit(repository: context.read<TasksDB>())..getAllTasks(),
+            child: const HomePage(),
+          );
         }
         // usuário não está  logado
         else {

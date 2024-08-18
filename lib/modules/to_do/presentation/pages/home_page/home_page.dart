@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do_app/config/database/tasks/tasks_db.dart';
 import 'package:to_do_app/modules/to_do/domain/task.dart';
+import 'package:to_do_app/modules/to_do/presentation/pages/home_page/cubit/home_page_cubit.dart';
+import 'package:to_do_app/modules/to_do/presentation/widgets/loader.dart';
 import 'package:to_do_app/modules/to_do/presentation/widgets/my_heat_map.dart';
 import 'package:to_do_app/modules/to_do/presentation/widgets/task_list_tile.dart';
 import 'package:to_do_app/utils/app_colors.dart';
@@ -33,11 +36,13 @@ class _HomePageState extends State<HomePage> {
 
             await db.createTask(
               task: Task(
-                title: 'Chico',
+                title: 'Tayssa',
                 status: 0,
                 description: 'e',
               ),
             );
+
+            if (context.mounted) context.read<HomePageCubit>().getAllTasks();
 
             final tasks = await db.getAllTasks();
 
@@ -97,20 +102,35 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 10),
-            Expanded(
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: 10,
-                shrinkWrap: true,
-                itemBuilder: (context, index) => TaskListTile(
-                  task: Task(
-                    id: 1,
-                    title: 'Do laundry',
-                    status: 0,
-                    description: 'Have to do laundry',
-                  ),
+            Center(
+              child: Loader<HomePageCubit, HomePageState>(
+                selector: (state) => state.maybeWhen(
+                  orElse: () => false,
+                  loading: () => true,
                 ),
               ),
+            ),
+            BlocSelector<HomePageCubit, HomePageState, List<Task>>(
+              selector: (state) => state.maybeWhen(
+                orElse: () => [],
+                data: (tasks) => tasks,
+              ),
+              builder: (context, tasks) {
+                return Expanded(
+                  child: RefreshIndicator(
+                    color: AppColors.mainGreen,
+                    onRefresh: () async {
+                      context.read<HomePageCubit>().getAllTasks();
+                    },
+                    child: ListView.builder(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: tasks.length,
+                      itemBuilder: (context, index) => TaskListTile(task: tasks[index]),
+                    ),
+                  ),
+                );
+              },
             )
           ],
         ),

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:to_do_app/config/database/tasks/tasks_db.dart';
 import 'package:to_do_app/modules/to_do/domain/task.dart';
+import 'package:to_do_app/modules/to_do/presentation/pages/edit_task_page/edit_task_page.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/home_page/cubit/home_page_cubit.dart';
 
 class TaskListTile extends StatelessWidget {
@@ -37,7 +40,18 @@ class TaskListTile extends StatelessWidget {
           children: [
             // Edit Option
             SlidableAction(
-              onPressed: (context) {},
+              onPressed: (context) {
+                Navigator.push(
+                  context,
+                  PageTransition(
+                    child: BlocProvider(
+                      create: (context) => HomePageCubit(repository: context.read<TasksDB>()),
+                      child: EditTaskPage(task: task),
+                    ),
+                    type: PageTransitionType.rightToLeft,
+                  ),
+                );
+              },
               backgroundColor: const Color.fromARGB(255, 66, 66, 66),
               icon: Icons.edit,
               borderRadius: BorderRadius.circular(8),

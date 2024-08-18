@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:to_do_app/modules/to_do/domain/task.dart';
+import 'package:to_do_app/modules/to_do/presentation/pages/home_page/cubit/home_page_cubit.dart';
 
 class TaskListTile extends StatelessWidget {
   final Task task;
@@ -12,6 +14,20 @@ class TaskListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    checkTask() {
+      int toggleValue(int value) {
+        if (value == 0) {
+          return 1;
+        } else if (value == 1) {
+          return 0;
+        } else {
+          throw ArgumentError("O valor deve ser 0 ou 1");
+        }
+      }
+
+      context.read<HomePageCubit>().updateTask(task: task.copyWith(status: toggleValue(task.status)));
+    }
+
     final taskIsDone = task.status == 0 ? false : true;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 25),
@@ -52,9 +68,12 @@ class TaskListTile extends StatelessWidget {
                 ),
               ),
               trailing: Checkbox(
-                activeColor: Theme.of(context).colorScheme.inversePrimary,
+                activeColor: Colors.white,
+                checkColor: Colors.grey.shade900,
                 value: taskIsDone,
-                onChanged: (value) {},
+                onChanged: (value) {
+                  checkTask();
+                },
               ),
             ),
           ),

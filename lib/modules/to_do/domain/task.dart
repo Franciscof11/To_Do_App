@@ -1,10 +1,11 @@
 import 'dart:convert';
 
-enum TaskStatus {
-  toDo(),
-  /* 0  */
-  done,
-  /* 1  */
+enum Status {
+  toDo(0),
+  done(1);
+
+  final int code;
+  const Status(this.code);
 }
 
 class Task {

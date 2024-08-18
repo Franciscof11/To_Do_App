@@ -34,24 +34,6 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.only(right: 30),
         child: FloatingActionButton(
           onPressed: () async {
-            /*      final db = TasksDB();
-
-            await db.createTask(
-              task: Task(
-                title: 'Tayssa',
-                status: 0,
-                description: 'e',
-              ),
-            );
-
-            if (context.mounted) context.read<HomePageCubit>().getAllTasks();
-
-            final tasks = await db.getAllTasks();
-
-            for (var x in tasks) {
-              print(x.toString());
-            } */
-
 /*             final db = TasksDB();
 
             await db.clearTable();
@@ -137,6 +119,9 @@ class _HomePageState extends State<HomePage> {
                   child: RefreshIndicator(
                     color: AppColors.mainGreen,
                     onRefresh: () async {
+                      for (var x in tasks) {
+                        print(x.toString());
+                      }
                       context.read<HomePageCubit>().getAllTasks();
                     },
                     child: ListView.builder(

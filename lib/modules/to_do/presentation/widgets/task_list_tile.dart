@@ -7,6 +7,8 @@ import 'package:to_do_app/config/database/tasks/tasks_db.dart';
 import 'package:to_do_app/modules/to_do/domain/task.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/edit_task_page/edit_task_page.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/home_page/cubit/home_page_cubit.dart';
+import 'package:to_do_app/modules/to_do/presentation/pages/home_page/home_page.dart';
+import 'package:to_do_app/utils/app_colors.dart';
 
 class TaskListTile extends StatelessWidget {
   final Task task;
@@ -38,57 +40,168 @@ class TaskListTile extends StatelessWidget {
         endActionPane: ActionPane(
           motion: const StretchMotion(),
           children: [
-            // Edit Option
-            SlidableAction(
-              onPressed: (context) {
-                Navigator.push(
-                  context,
-                  PageTransition(
-                    child: BlocProvider(
-                      create: (context) => HomePageCubit(repository: context.read<TasksDB>()),
-                      child: EditTaskPage(task: task),
-                    ),
-                    type: PageTransitionType.rightToLeft,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        child: BlocProvider(
+                          create: (context) => HomePageCubit(repository: context.read<TasksDB>()),
+                          child: EditTaskPage(task: task),
+                        ),
+                        type: PageTransitionType.rightToLeft,
+                      ),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.edit,
+                    color: Colors.white,
                   ),
-                );
-              },
-              backgroundColor: const Color.fromARGB(255, 66, 66, 66),
-              icon: Icons.edit,
-              borderRadius: BorderRadius.circular(8),
+                  style: IconButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 66, 66, 66),
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+                    padding: const EdgeInsets.all(20),
+                  ),
+                ),
+              ),
             ),
-
-            // Delete Option
-            SlidableAction(
-              onPressed: (context) {},
-              backgroundColor: Colors.red,
-              icon: Icons.delete,
-              borderRadius: BorderRadius.circular(8),
+            // Edit Option
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (modalContext) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 220),
+                          child: Dialog(
+                            backgroundColor: Colors.white,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Tem certeza que deseja excluir essa tarefa?',
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.raleway(
+                                      color: Colors.black,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 50),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.pop(modalContext);
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: AppColors.mainGreen,
+                                            padding: const EdgeInsets.all(15),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                          ),
+                                          child: Text(
+                                            'Cancelar',
+                                            style: GoogleFonts.raleway(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 20),
+                                      Expanded(
+                                        child: ElevatedButton(
+                                          onPressed: () {
+                                            context
+                                                .read<HomePageCubit>()
+                                                .deleteTask(
+                                                  id: task.id ?? 0,
+                                                )
+                                                .then(
+                                              (value) {
+                                                Navigator.pop(modalContext);
+                                                Navigator.push(
+                                                  context,
+                                                  PageTransition(
+                                                    type: PageTransitionType.fade,
+                                                    child: BlocProvider(
+                                                      create: (context) => HomePageCubit(repository: context.read<TasksDB>())..getAllTasks(),
+                                                      child: const HomePage(),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.red,
+                                            padding: const EdgeInsets.all(15),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                          ),
+                                          child: Text(
+                                            'Excluir',
+                                            style: GoogleFonts.raleway(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.delete_outline,
+                    color: Colors.white,
+                  ),
+                  style: IconButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+                    padding: const EdgeInsets.all(20),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
-        child: GestureDetector(
-          onTap: () {},
-          child: Container(
-            padding: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              color: taskIsDone ? Colors.green : Theme.of(context).colorScheme.secondary,
+        child: Container(
+          padding: const EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
+            color: taskIsDone ? Colors.green : Theme.of(context).colorScheme.secondary,
+          ),
+          child: ListTile(
+            title: Text(
+              task.title,
+              style: GoogleFonts.inter(
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
             ),
-            child: ListTile(
-              title: Text(
-                task.title,
-                style: GoogleFonts.inter(
-                  color: Theme.of(context).colorScheme.inversePrimary,
-                ),
-              ),
-              trailing: Checkbox(
-                activeColor: Colors.white,
-                checkColor: Colors.grey.shade900,
-                value: taskIsDone,
-                onChanged: (value) {
-                  checkTask();
-                },
-              ),
+            trailing: Checkbox(
+              activeColor: Colors.white,
+              checkColor: Colors.grey.shade900,
+              value: taskIsDone,
+              onChanged: (value) {
+                checkTask();
+              },
             ),
           ),
         ),

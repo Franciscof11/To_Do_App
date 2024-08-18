@@ -63,4 +63,20 @@ class HomePageCubit extends Cubit<HomePageState> {
       emit(HomePageState.error(message: 'Error! $e'));
     }
   }
+
+  Future<void> deleteTask({required int id}) async {
+    try {
+      await _repository.deleteTask(id: id);
+
+      final tasks = await _repository.getAllTasks();
+
+      emit(HomePageState.data(tasks: tasks));
+    } catch (e) {
+      log(
+        'Error! $e',
+        error: e,
+      );
+      emit(HomePageState.error(message: 'Error! $e'));
+    }
+  }
 }

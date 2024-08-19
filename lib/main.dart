@@ -3,8 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_app/firebase_options.dart';
-import 'package:to_do_app/modules/auth/data/auth_repository.dart';
 import 'package:to_do_app/modules/to_do/data/task_repository.dart';
+import 'package:to_do_app/modules/to_do/presentation/pages/splash_screen/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +15,7 @@ void main() async {
 
   runApp(
     DevicePreview(
-      enabled: true, // Ativa ou não o Device Preview
+      enabled: true, // Ativa ou não o Device Preview //
       builder: (context) => const MainApp(),
     ),
   );
@@ -26,13 +26,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final repository = AuthRepository().authChanges(context);
-
     return RepositoryProvider(
       create: (context) => TaskRepository(),
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: repository,
+        home: SplashScreen(),
       ),
     );
   }

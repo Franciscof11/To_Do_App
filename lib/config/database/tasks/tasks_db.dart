@@ -18,10 +18,10 @@ class TasksDB {
     );
   }
 
-  Future<Task> createTask({required Task task}) async {
+  Future<int> createTask({required Task task}) async {
     final database = await TasksDatabaseService().database;
-    await database.insert(tableName, task.toMap());
-    return task;
+    final generatedTaskId = await database.insert(tableName, task.toMap());
+    return generatedTaskId;
   }
 
   Future<List<Task>> getAllTasks() async {

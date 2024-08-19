@@ -34,11 +34,18 @@ class HomePageCubit extends Cubit<HomePageState> {
     try {
       emit(const HomePageState.loading());
 
-      final creaTedtask = await _repository.createTask(task: task);
+      final taskId = await _repository.createTask(task: task);
 
-      print(creaTedtask.toString());
+      print(taskId.toString());
 
-      _repository.createToFirestore(task: creaTedtask);
+      final taskToFirebase = Task(
+        id: taskId,
+        title: task.title,
+        status: task.status,
+        description: task.description,
+      );
+
+      _repository.createToFirestore(task: taskToFirebase);
 
       final tasks = await _repository.getAllTasks();
 

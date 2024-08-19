@@ -10,7 +10,7 @@ class TaskRepository {
     return _repository.getAllTasks();
   }
 
-  Future<Task> createTask({required Task task}) async {
+  Future<int> createTask({required Task task}) async {
     return await _repository.createTask(task: task);
   }
 

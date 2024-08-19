@@ -140,10 +140,7 @@ class _HomePageState extends State<HomePage> {
                         physics: const AlwaysScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: tasks.length,
-                        itemBuilder: (context, index) => BlocProvider(
-                          create: (context) => HomePageCubit(repository: context.read<TasksDB>()),
-                          child: TaskListTile(task: tasks[index]),
-                        ),
+                        itemBuilder: (context, index) => TaskListTile(task: tasks[index]),
                       ),
                     ),
                   ),

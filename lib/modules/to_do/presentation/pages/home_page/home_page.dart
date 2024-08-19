@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:to_do_app/config/database/tasks/tasks_db.dart';
+import 'package:to_do_app/modules/to_do/data/task_repository.dart';
 import 'package:to_do_app/modules/to_do/domain/task.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/create_task_page/create_task_page.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/home_page/cubit/home_page_cubit.dart';
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
               context,
               PageTransition(
                 child: BlocProvider(
-                  create: (context) => HomePageCubit(repository: context.read<TasksDB>()),
+                  create: (context) => HomePageCubit(repository: context.read<TaskRepository>()),
                   child: const CreateTaskPage(),
                 ),
                 type: PageTransitionType.rightToLeft,
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: SearchWidget(
                 modal: BlocProvider(
-                  create: (context) => HomePageCubit(repository: context.read<TasksDB>()),
+                  create: (context) => HomePageCubit(repository: context.read<TaskRepository>()),
                   child: FilterTaskModal(dialogContext: context),
                 ),
               ),

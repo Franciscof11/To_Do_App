@@ -2,15 +2,15 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:to_do_app/config/database/tasks/tasks_db.dart';
+import 'package:to_do_app/modules/to_do/data/task_repository.dart';
 import 'package:to_do_app/modules/to_do/domain/task.dart';
 
 part 'home_page_cubit.freezed.dart';
 part 'home_page_state.dart';
 
 class HomePageCubit extends Cubit<HomePageState> {
-  final TasksDB _repository;
-  HomePageCubit({required TasksDB repository})
+  final TaskRepository _repository;
+  HomePageCubit({required TaskRepository repository})
       : _repository = repository,
         super(const HomePageState.initial());
 

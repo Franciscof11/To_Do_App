@@ -2,9 +2,9 @@ import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:to_do_app/config/database/tasks/tasks_db.dart';
 import 'package:to_do_app/firebase_options.dart';
 import 'package:to_do_app/modules/auth/data/auth_repository.dart';
+import 'package:to_do_app/modules/to_do/data/task_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +29,7 @@ class MainApp extends StatelessWidget {
     final repository = AuthRepository().authChanges(context);
 
     return RepositoryProvider(
-      create: (context) => TasksDB(),
+      create: (context) => TaskRepository(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: repository,

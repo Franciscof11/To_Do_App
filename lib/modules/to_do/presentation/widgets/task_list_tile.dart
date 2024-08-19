@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:to_do_app/config/database/tasks/tasks_db.dart';
+import 'package:to_do_app/modules/to_do/data/task_repository.dart';
 import 'package:to_do_app/modules/to_do/domain/task.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/edit_task_page/edit_task_page.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/home_page/cubit/home_page_cubit.dart';
@@ -49,7 +49,7 @@ class TaskListTile extends StatelessWidget {
                       context,
                       PageTransition(
                         child: BlocProvider(
-                          create: (context) => HomePageCubit(repository: context.read<TasksDB>()),
+                          create: (context) => HomePageCubit(repository: context.read<TaskRepository>()),
                           child: EditTaskPage(task: task),
                         ),
                         type: PageTransitionType.rightToLeft,
@@ -135,7 +135,7 @@ class TaskListTile extends StatelessWidget {
                                                   PageTransition(
                                                     type: PageTransitionType.fade,
                                                     child: BlocProvider(
-                                                      create: (context) => HomePageCubit(repository: context.read<TasksDB>())..getAllTasks(),
+                                                      create: (context) => HomePageCubit(repository: context.read<TaskRepository>())..getAllTasks(),
                                                       child: const HomePage(),
                                                     ),
                                                   ),

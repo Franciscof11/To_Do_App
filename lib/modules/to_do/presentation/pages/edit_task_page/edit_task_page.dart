@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:to_do_app/config/database/tasks/tasks_db.dart';
+import 'package:to_do_app/modules/to_do/data/task_repository.dart';
 import 'package:to_do_app/modules/to_do/domain/task.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/home_page/cubit/home_page_cubit.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/home_page/home_page.dart';
@@ -121,7 +121,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                               PageTransition(
                                 type: PageTransitionType.leftToRight,
                                 child: BlocProvider(
-                                  create: (context) => HomePageCubit(repository: context.read<TasksDB>())..getAllTasks(),
+                                  create: (context) => HomePageCubit(repository: context.read<TaskRepository>())..getAllTasks(),
                                   child: const HomePage(),
                                 ),
                               ),

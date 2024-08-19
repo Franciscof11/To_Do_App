@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:to_do_app/config/database/tasks/tasks_db.dart';
 import 'package:to_do_app/modules/auth/presentation/pages/sign_in_page.dart';
+import 'package:to_do_app/modules/to_do/data/task_repository.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/home_page/cubit/home_page_cubit.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/home_page/home_page.dart';
 
@@ -16,7 +16,7 @@ class AuthRepository {
         // usuário logado
         if (snapshot.hasData) {
           return BlocProvider(
-            create: (context) => HomePageCubit(repository: context.read<TasksDB>())..getAllTasks(),
+            create: (context) => HomePageCubit(repository: context.read<TaskRepository>())..getAllTasks(),
             child: const HomePage(),
           );
         }

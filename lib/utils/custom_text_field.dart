@@ -7,7 +7,7 @@ class CustomTextField extends StatefulWidget {
   final Widget? prefixIcon;
   final bool isSecret;
   final TextEditingController? controller;
-  final String? aditionalLabel;
+
   final bool isLarge;
   final bool isOptional;
   final bool isNumber;
@@ -17,7 +17,6 @@ class CustomTextField extends StatefulWidget {
     this.prefixIcon,
     this.isSecret = false,
     this.controller,
-    this.aditionalLabel = '',
     this.isLarge = false,
     this.isOptional = false,
     this.isNumber = false,
@@ -52,16 +51,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            if (widget.aditionalLabel != '')
-              Text(
-                widget.aditionalLabel!,
-                textAlign: TextAlign.justify,
-                style: GoogleFonts.workSans(
-                  color: const Color(0xFF999999),
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                ),
-              ),
           ],
         ),
         const SizedBox(height: 10),

@@ -8,7 +8,6 @@ import 'package:to_do_app/modules/to_do/presentation/pages/create_task_page/crea
 import 'package:to_do_app/modules/to_do/presentation/pages/home_page/cubit/home_page_cubit.dart';
 import 'package:to_do_app/modules/to_do/presentation/widgets/filter_task_modal.dart';
 import 'package:to_do_app/modules/to_do/presentation/widgets/loader.dart';
-import 'package:to_do_app/modules/to_do/presentation/widgets/my_heat_map.dart';
 import 'package:to_do_app/modules/to_do/presentation/widgets/search_widget.dart';
 import 'package:to_do_app/modules/to_do/presentation/widgets/task_list_tile.dart';
 import 'package:to_do_app/utils/app_colors.dart';
@@ -95,14 +94,7 @@ class _HomePageState extends State<HomePage> {
                 const Spacer(),
               ],
             ),
-            const SizedBox(height: 40),
-            Center(
-              child: MyHeatMap(
-                startDate: DateTime(2024, DateTime.august, 1),
-                datasets: dataset,
-              ),
-            ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 60),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: SearchWidget(

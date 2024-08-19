@@ -4,6 +4,7 @@ import 'package:to_do_app/modules/auth/data/auth_repository.dart';
 import 'package:to_do_app/modules/auth/presentation/pages/sign_up_page.dart';
 import 'package:to_do_app/modules/auth/presentation/widgets/apple_sign_in_button.dart';
 import 'package:to_do_app/modules/auth/presentation/widgets/google_sign_in_button.dart';
+import 'package:to_do_app/utils/app_colors.dart';
 import 'package:to_do_app/utils/custom_text_field.dart';
 import 'package:to_do_app/utils/remove_glow_effect.dart';
 
@@ -22,7 +23,7 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     double widthDevice = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.grey.shade900,
       body: RemoveGlowEffect(
         child: SingleChildScrollView(
           child: Form(
@@ -31,33 +32,34 @@ class _SignInPageState extends State<SignInPage> {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 children: [
-                  const SizedBox(height: 60),
+                  const SizedBox(height: 50),
                   //
-                  const Icon(
-                    Icons.lock,
-                    size: 140,
+                  Icon(
+                    Icons.task_outlined,
+                    size: 130,
+                    color: AppColors.mainGreen,
                   ),
                   //
                   const SizedBox(height: 20),
                   Text(
-                    "Welcome back you've been missed!",
-                    style: GoogleFonts.rubik(
-                      color: Colors.grey[600],
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                    "Bem vindo(a)!",
+                    style: GoogleFonts.raleway(
+                      color: Colors.white,
+                      fontSize: 26,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const SizedBox(height: 26),
+                  const SizedBox(height: 30),
                   CustomTextField(label: 'Email', controller: emailController),
                   const SizedBox(height: 16),
-                  CustomTextField(label: 'Password', isSecret: true, controller: passwordController),
+                  CustomTextField(label: 'Senha', isSecret: true, controller: passwordController),
                   const SizedBox(height: 10),
                   Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      "Forgot Password?",
+                      "Esqueceu a senha?",
                       style: GoogleFonts.rubik(
-                        color: Colors.grey[700],
+                        color: Colors.white60,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
@@ -76,15 +78,17 @@ class _SignInPageState extends State<SignInPage> {
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 80),
                       backgroundColor: Colors.black,
+                      overlayColor: AppColors.mainGreen,
                       shape: ContinuousRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
                       ),
                     ),
                     child: Text(
-                      'Sign In',
+                      'Entrar',
                       style: GoogleFonts.rubik(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
+                        color: AppColors.mainGreen,
                       ),
                     ),
                   ),
@@ -97,9 +101,9 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                     child: Text(
-                      "Sign Up",
+                      "Criar Conta",
                       style: GoogleFonts.rubik(
-                        color: Colors.grey[700],
+                        color: Colors.white60,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
@@ -109,23 +113,21 @@ class _SignInPageState extends State<SignInPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        width: widthDevice <= 380 ? 80 : 100,
+                      Expanded(
                         child: Divider(
                           color: Colors.grey[600],
                           thickness: 0.5,
                         ),
                       ),
                       Text(
-                        "Or continue with",
+                        "   Ou continue com   ",
                         style: GoogleFonts.rubik(
-                          color: Colors.grey[600],
+                          color: Colors.white60,
                           fontSize: 16,
                           fontWeight: FontWeight.normal,
                         ),
                       ),
-                      SizedBox(
-                        width: widthDevice <= 380 ? 80 : 100,
+                      Expanded(
                         child: Divider(
                           color: Colors.grey[600],
                           thickness: 0.5,
@@ -133,14 +135,14 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 30),
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GoogleSignInButton(
                         urlImage: 'assets/google.png',
                       ),
-                      SizedBox(width: 24),
+                      SizedBox(width: 30),
                       AplleSignInButton(
                         urlImage: 'assets/apple.png',
                       ),

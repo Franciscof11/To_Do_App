@@ -29,4 +29,8 @@ class TaskRepository {
   updateToFirestore({required Task task}) {
     firestoreService.updateTask(task: task);
   }
+
+  deleteFromFirestore({required int taskId}) {
+    firestoreService.deleteTask(id: taskId);
+  }
 }

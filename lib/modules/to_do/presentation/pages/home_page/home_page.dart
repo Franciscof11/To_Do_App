@@ -12,6 +12,8 @@ import 'package:to_do_app/modules/to_do/presentation/widgets/search_widget.dart'
 import 'package:to_do_app/modules/to_do/presentation/widgets/task_list_tile.dart';
 import 'package:to_do_app/utils/app_colors.dart';
 
+import '../../../../auth/data/auth_repository.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -53,10 +55,17 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 40),
             Row(
               children: [
-                Icon(
-                  Icons.menu,
-                  color: AppColors.mainGreen,
-                  size: 30,
+                GestureDetector(
+                  onTap: () {
+                    final _authRepository = AuthRepository();
+
+                    _authRepository.signOut();
+                  },
+                  child: Icon(
+                    Icons.menu,
+                    color: AppColors.mainGreen,
+                    size: 30,
+                  ),
                 ),
                 const Spacer(),
                 Text.rich(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:to_do_app/modules/auth/presentation/pages/sign_in_page.dart';
 import 'package:to_do_app/modules/to_do/data/task_repository.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/home_page/cubit/home_page_cubit.dart';
@@ -145,11 +146,16 @@ class AuthRepository {
         email: email,
         password: password,
       );
+
       if (context.mounted) {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => const HomePage(),
+          PageTransition(
+            type: PageTransitionType.leftToRight,
+            child: BlocProvider(
+              create: (context) => HomePageCubit(repository: context.read<TaskRepository>())..getAllTasks(),
+              child: const HomePage(),
+            ),
           ),
         );
       }

@@ -23,8 +23,12 @@ class TaskRepository {
   }
 
   postToFirestore({required List<Task> tasks}) {
-    for (var task in tasks) {
-      firestoreService.createTask(task: task);
+    for (var taskVar in tasks) {
+      if (tasks.any((task) => task.id == taskVar.id)) {
+        firestoreService.updateTask(task: taskVar);
+      } else {
+        firestoreService.createTask(task: taskVar);
+      }
     }
   }
 }

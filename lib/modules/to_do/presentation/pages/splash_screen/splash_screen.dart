@@ -29,10 +29,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
         await tasksRepository.postToFirestore(tasks: tasks);
 
-        debugPrint('#Sucess deploy routine!');
+        debugPrint('#Sucess firestore deploy routine!');
         debugPrint(tasks.toString());
-        debugPrint('');
-        debugPrint('#Cleaning leads table...');
       },
     );
   }

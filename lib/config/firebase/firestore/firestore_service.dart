@@ -20,4 +20,11 @@ class FirestoreService {
           onError: (e) => debugPrint("Error: $e"),
         );
   }
+
+  Future<void> deleteTask({required int id}) {
+    return firestore.collection('tasks').doc(id.toString()).delete().then(
+          (doc) => debugPrint("Task deleted!"),
+          onError: (e) => debugPrint("Error: $e"),
+        );
+  }
 }

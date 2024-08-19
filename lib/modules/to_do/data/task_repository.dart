@@ -10,8 +10,8 @@ class TaskRepository {
     return _repository.getAllTasks();
   }
 
-  Future<void> createTask({required Task task}) async {
-    _repository.createTask(task: task);
+  Future<Task> createTask({required Task task}) async {
+    return await _repository.createTask(task: task);
   }
 
   Future<void> updateTask({required Task task}) {
@@ -22,13 +22,11 @@ class TaskRepository {
     return _repository.deleteTask(id: id);
   }
 
-  postToFirestore({required List<Task> tasks}) {
-    for (var taskVar in tasks) {
-      if (tasks.any((task) => task.id == taskVar.id)) {
-        firestoreService.updateTask(task: taskVar);
-      } else {
-        firestoreService.createTask(task: taskVar);
-      }
-    }
+  createToFirestore({required Task task}) {
+    firestoreService.createTask(task: task);
+  }
+
+  updateToFirestore({required Task task}) {
+    firestoreService.updateTask(task: task);
   }
 }

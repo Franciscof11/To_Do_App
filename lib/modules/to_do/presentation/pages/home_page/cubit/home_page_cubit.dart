@@ -80,15 +80,27 @@ class HomePageCubit extends Cubit<HomePageState> {
     }
   }
 
-  Future<void> filterTasks(int taskStatus, List<Task> tasks) async {
+  Future<void> filterTasksByStatus({required Map<String, bool> filters}) async {
     try {
       emit(const HomePageState.loading());
-      List<Task> filteredTasks = tasks;
 
-      filteredTasks = tasks.where((task) {
-        if (task.status == taskStatus) return true;
-        return false;
-      }).toList();
+      final tasks = await _repository.getAllTasks();
+
+      List<Task> filteredTasks = [];
+
+      if (filters['doneTasks'] == true) {
+        final task = tasks.where((task) => task.status == 1);
+
+        filteredTasks.addAll(task);
+      }
+
+      if (filters['toDoTasks'] == true) {
+        final task = tasks.where((task) => task.status == 0);
+
+        filteredTasks.addAll(task);
+      }
+
+      print(filteredTasks);
 
       emit(HomePageState.data(tasks: filteredTasks));
     } catch (e) {

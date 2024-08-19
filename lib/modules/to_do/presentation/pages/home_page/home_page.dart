@@ -104,7 +104,10 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 40),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: const SearchWidget(modal: SizedBox()),
+              child: BlocProvider(
+                create: (context) => HomePageCubit(repository: context.read<TasksDB>()),
+                child: const SearchWidget(),
+              ),
             ),
             const SizedBox(height: 40),
             Center(

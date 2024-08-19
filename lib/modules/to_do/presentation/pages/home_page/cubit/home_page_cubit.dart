@@ -128,4 +128,26 @@ class HomePageCubit extends Cubit<HomePageState> {
       emit(HomePageState.error(message: 'Error! $e'));
     }
   }
+
+  Future<void> deleteAllDoneTasks() async {
+    try {
+      final originalTasks = await _repository.getAllTasks();
+
+      final deletList = originalTasks.where((task) => task.status == 1).toList();
+
+      for (var task in deletList) {
+        deleteTask(id: task.id ?? 0);
+      }
+
+      final tasks = await _repository.getAllTasks();
+
+      emit(HomePageState.data(tasks: tasks));
+    } catch (e) {
+      log(
+        'Error! $e',
+        error: e,
+      );
+      emit(HomePageState.error(message: 'Error! $e'));
+    }
+  }
 }

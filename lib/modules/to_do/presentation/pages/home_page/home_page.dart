@@ -149,7 +149,44 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               },
-            )
+            ),
+            BlocSelector<HomePageCubit, HomePageState, List<Task>>(
+              selector: (state) => state.maybeWhen(
+                orElse: () => [],
+                data: (tasks) => tasks,
+              ),
+              builder: (context, tasks) {
+                final hasDoneTasks = tasks.any((task) => task.status == 1);
+                return Visibility(
+                  visible: hasDoneTasks,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 26, bottom: 15),
+                    child: GestureDetector(
+                      onTap: () {
+                        context.read<HomePageCubit>().deleteAllDoneTasks();
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const Icon(
+                            Icons.delete_forever_outlined,
+                            color: Colors.red,
+                          ),
+                          Text(
+                            'Deletar tarefas concluídas',
+                            style: GoogleFonts.raleway(
+                              color: Colors.red,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

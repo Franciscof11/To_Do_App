@@ -100,6 +100,7 @@ class HomePageCubit extends Cubit<HomePageState> {
         filteredTasks.addAll(task);
       }
 
+      print(filters);
       print(filteredTasks);
 
       emit(HomePageState.data(tasks: filteredTasks));

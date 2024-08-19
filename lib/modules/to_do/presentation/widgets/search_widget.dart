@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:to_do_app/config/database/tasks/tasks_db.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/home_page/cubit/home_page_cubit.dart';
 
-import 'filter_task_modal.dart';
-
 class SearchWidget extends StatefulWidget {
-  const SearchWidget({super.key});
+  final Widget modal;
+  const SearchWidget({super.key, required this.modal});
 
   @override
   State<SearchWidget> createState() => _SearchWidgetState();
@@ -58,10 +56,7 @@ class _SearchWidgetState extends State<SearchWidget> {
             showModalBottomSheet(
               context: context,
               isScrollControlled: true,
-              builder: (dialogContext) => BlocProvider(
-                create: (context) => HomePageCubit(repository: context.read<TasksDB>()),
-                child: FilterTaskModal(dialogContext: dialogContext),
-              ),
+              builder: (dialogContext) => widget.modal,
               barrierColor: Colors.grey.shade100.withOpacity(0.7),
               shape: const ContinuousRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(85))),
             );

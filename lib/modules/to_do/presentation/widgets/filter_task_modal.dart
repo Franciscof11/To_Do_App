@@ -108,7 +108,12 @@ class _FilterTaskModalState extends State<FilterTaskModal> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    context.read<HomePageCubit>().filterTasksByStatus(filters: filters);
+                    widget.dialogContext.read<HomePageCubit>().filterTasksByStatus(filters: filters);
+                    if (!doneTasks && !toDoTasks) {
+                      print('alo');
+                      widget.dialogContext.read<HomePageCubit>().getAllTasks();
+                    }
+
                     Navigator.pop(context);
                     FocusScope.of(context).unfocus();
                   },

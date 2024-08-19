@@ -6,6 +6,7 @@ import 'package:to_do_app/config/database/tasks/tasks_db.dart';
 import 'package:to_do_app/modules/to_do/domain/task.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/create_task_page/create_task_page.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/home_page/cubit/home_page_cubit.dart';
+import 'package:to_do_app/modules/to_do/presentation/widgets/filter_task_modal.dart';
 import 'package:to_do_app/modules/to_do/presentation/widgets/loader.dart';
 import 'package:to_do_app/modules/to_do/presentation/widgets/my_heat_map.dart';
 import 'package:to_do_app/modules/to_do/presentation/widgets/search_widget.dart';
@@ -104,9 +105,11 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 40),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: BlocProvider(
-                create: (context) => HomePageCubit(repository: context.read<TasksDB>()),
-                child: const SearchWidget(),
+              child: SearchWidget(
+                modal: BlocProvider(
+                  create: (context) => HomePageCubit(repository: context.read<TasksDB>()),
+                  child: FilterTaskModal(dialogContext: context),
+                ),
               ),
             ),
             const SizedBox(height: 40),

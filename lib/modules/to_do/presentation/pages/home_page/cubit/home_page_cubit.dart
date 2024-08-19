@@ -63,7 +63,7 @@ class HomePageCubit extends Cubit<HomePageState> {
     try {
       await _repository.updateTask(task: task);
 
-/*       await _repository.updateToFirestore(task: task); */
+      await _repository.updateToFirestore(task: task);
 
       final tasks = await _repository.getAllTasks();
 
@@ -81,7 +81,7 @@ class HomePageCubit extends Cubit<HomePageState> {
     try {
       await _repository.deleteTask(id: id);
 
-/*       await _repository.deleteTask(id: id); */
+      await _repository.deleteFromFirestore(taskId: id);
 
       final tasks = await _repository.getAllTasks();
 

@@ -4,14 +4,10 @@ import 'package:to_do_app/modules/to_do/domain/task.dart';
 
 class FirestoreService {
   final firestore = FirebaseFirestore.instance;
-  Future<void> createTask({required Task task}) {
-    return firestore
-        .collection('tasks')
-        .add(
-          task.toMap(),
-        )
-        .then((value) => debugPrint("Task Added"))
-        .catchError((error) => debugPrint("ERRO: $error"));
+  Future<void> createTask({required Task task}) async {
+    final docRef = FirebaseFirestore.instance.collection('tasks').doc(task.id.toString());
+
+    await docRef.set(task.toMap());
   }
 
   Future<void> updateTask({required Task task}) {

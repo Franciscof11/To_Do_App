@@ -22,23 +22,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    Map<DateTime, int>? dataset = {
-      DateTime(2024, DateTime.august, 10): 1,
-      DateTime(2024, DateTime.august, 13): 2,
-      DateTime(2024, DateTime.august, 16): 3,
-      DateTime(2024, DateTime.august, 18): 5,
-    };
-
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(right: 30),
         child: FloatingActionButton(
           onPressed: () async {
-/*             final db = TasksDB();
-
-            await db.clearTable();
- */
             Navigator.push(
               context,
               PageTransition(

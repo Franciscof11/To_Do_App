@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:to_do_app/modules/auth/data/auth_repository.dart';
 import 'package:to_do_app/modules/auth/presentation/pages/sign_in_page.dart';
+import 'package:to_do_app/utils/app_colors.dart';
 import 'package:to_do_app/utils/custom_text_field.dart';
 import 'package:to_do_app/utils/remove_glow_effect.dart';
 
@@ -24,7 +26,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     double widthDevice = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.grey.shade900,
       body: RemoveGlowEffect(
         child: SingleChildScrollView(
           child: Form(
@@ -33,20 +35,21 @@ class _SignUpPageState extends State<SignUpPage> {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 children: [
-                  const SizedBox(height: 60),
+                  const SizedBox(height: 50),
                   //
-                  const Icon(
-                    Icons.lock,
-                    size: 140,
+                  Icon(
+                    Icons.task_outlined,
+                    size: 130,
+                    color: AppColors.mainGreen,
                   ),
                   //
                   const SizedBox(height: 20),
                   Text(
-                    "Let's create an account for you",
-                    style: GoogleFonts.rubik(
-                      color: Colors.grey[600],
+                    "Vamos criar uma conta para você!",
+                    style: GoogleFonts.raleway(
+                      color: Colors.white,
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   const SizedBox(height: 26),
@@ -54,15 +57,15 @@ class _SignUpPageState extends State<SignUpPage> {
                     label: 'Email',
                     controller: emailSignUpController,
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 25),
                   CustomTextField(
-                    label: 'Password',
+                    label: 'Senha',
                     isSecret: true,
                     controller: passwordSignUpController,
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 25),
                   CustomTextField(
-                    label: 'Confirm password',
+                    label: 'Confirmar senha',
                     isSecret: true,
                     controller: confirmPassword,
                   ),
@@ -88,7 +91,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       const Text(
-                                        'Passwords dont match!',
+                                        'As senhas não são iguais!',
                                         style: TextStyle(
                                           fontSize: 18,
                                         ),
@@ -117,17 +120,18 @@ class _SignUpPageState extends State<SignUpPage> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(double.infinity, 80),
+                      minimumSize: const Size(200, 70),
                       backgroundColor: Colors.black,
                       shape: ContinuousRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
                       ),
                     ),
                     child: Text(
-                      'Sign Up',
+                      'Criar conta',
                       style: GoogleFonts.rubik(
                         fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                        color: AppColors.mainGreen,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
@@ -135,16 +139,17 @@ class _SignUpPageState extends State<SignUpPage> {
                   GestureDetector(
                     onTap: () => Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const SignInPage(),
+                      PageTransition(
+                        type: PageTransitionType.leftToRight,
+                        child: const SignInPage(),
                       ),
                     ),
                     child: Text(
-                      "Already have an account?",
+                      "Já possui uma conta? Faça Login!",
                       style: GoogleFonts.rubik(
-                        color: Colors.grey[700],
+                        color: Colors.white60,
                         fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
@@ -152,23 +157,21 @@ class _SignUpPageState extends State<SignUpPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        width: widthDevice <= 380 ? 80 : 100,
+                      Expanded(
                         child: Divider(
                           color: Colors.grey[600],
                           thickness: 0.5,
                         ),
                       ),
                       Text(
-                        "Or continue with",
+                        "   Ou continue com   ",
                         style: GoogleFonts.rubik(
-                          color: Colors.grey[600],
+                          color: Colors.white60,
                           fontSize: 16,
                           fontWeight: FontWeight.normal,
                         ),
                       ),
-                      SizedBox(
-                        width: widthDevice <= 380 ? 80 : 100,
+                      Expanded(
                         child: Divider(
                           color: Colors.grey[600],
                           thickness: 0.5,
@@ -176,7 +179,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 30),
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

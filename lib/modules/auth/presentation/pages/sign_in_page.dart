@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:to_do_app/modules/auth/data/auth_repository.dart';
 import 'package:to_do_app/modules/auth/presentation/pages/sign_up_page.dart';
 import 'package:to_do_app/modules/auth/presentation/widgets/apple_sign_in_button.dart';
@@ -21,7 +22,6 @@ class _SignInPageState extends State<SignInPage> {
   final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    double widthDevice = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
       body: RemoveGlowEffect(
@@ -68,15 +68,17 @@ class _SignInPageState extends State<SignInPage> {
                   const SizedBox(height: 35),
                   ElevatedButton(
                     onPressed: () {
-                      formKey.currentState?.validate();
-                      AuthRepository().signIn(
-                        email: emailController.text,
-                        password: passwordController.text,
-                        context: context,
-                      );
+                      final formValid = formKey.currentState?.validate() ?? false;
+                      if (formValid) {
+                        AuthRepository().signIn(
+                          email: emailController.text,
+                          password: passwordController.text,
+                          context: context,
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(double.infinity, 80),
+                      minimumSize: const Size(200, 70),
                       backgroundColor: Colors.black,
                       overlayColor: AppColors.mainGreen,
                       shape: ContinuousRectangleBorder(
@@ -87,7 +89,7 @@ class _SignInPageState extends State<SignInPage> {
                       'Entrar',
                       style: GoogleFonts.rubik(
                         fontSize: 22,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                         color: AppColors.mainGreen,
                       ),
                     ),
@@ -96,8 +98,9 @@ class _SignInPageState extends State<SignInPage> {
                   GestureDetector(
                     onTap: () => Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const SignUpPage(),
+                      PageTransition(
+                        type: PageTransitionType.rightToLeft,
+                        child: const SignUpPage(),
                       ),
                     ),
                     child: Text(

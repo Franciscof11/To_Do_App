@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:to_do_app/modules/auth/presentation/pages/sign_in_page.dart';
 import 'package:to_do_app/modules/to_do/data/task_repository.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/home_page/cubit/home_page_cubit.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/home_page/home_page.dart';
+import 'package:to_do_app/utils/app_colors.dart';
 
 class AuthRepository {
   Widget authChanges(BuildContext context) {
@@ -62,9 +64,9 @@ class AuthRepository {
   }) async {
     showDialog(
       context: context,
-      builder: (context) => const Center(
+      builder: (context) => Center(
         child: CircularProgressIndicator(
-          color: Colors.black,
+          color: AppColors.mainGreen,
         ),
       ),
     );
@@ -73,29 +75,32 @@ class AuthRepository {
         email: email,
         password: password,
       );
-      Navigator.pop(context);
-      //
+      if (context.mounted) Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      print('------------------------------------------');
-      print(e.code);
-      Navigator.pop(context);
-      if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
-        print('###########################');
-        print('Invalid Credentials!');
+      debugPrint('------------------------------------------');
+      debugPrint(e.code);
 
+      if (context.mounted) {
+        FocusScope.of(context).unfocus();
+        Navigator.pop(context);
+      }
+
+      if (e.code == 'invalid-credential' && context.mounted) {
         showDialog(
           context: context,
           builder: (context) => Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 240),
+            padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 280),
             child: Card(
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'Invalid Credentials!',
-                      style: TextStyle(
-                        fontSize: 18,
+                    Text(
+                      'Credenciais Inválidas!',
+                      style: GoogleFonts.raleway(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                     const SizedBox(height: 40),
@@ -140,18 +145,98 @@ class AuthRepository {
         email: email,
         password: password,
       );
-      Navigator.push(
+      if (context.mounted) {
+        Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => const HomePage(),
-          ));
+          ),
+        );
+      }
     } on FirebaseAuthException catch (e) {
-      print('###########################');
-      print(e.code);
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+      if (context.mounted) {
+        FocusScope.of(context).unfocus();
+        Navigator.pop(context);
+      }
+
+      debugPrint(e.code);
+
+      if (e.code == 'weak-password' && context.mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 280),
+            child: Card(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Senha muito fraca!',
+                      style: GoogleFonts.raleway(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text(
+                        'OK',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      } else if (e.code == 'email-already-in-use' && context.mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 280),
+            child: Card(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Esse email já está em uso!',
+                      style: GoogleFonts.raleway(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text(
+                        'OK',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
       }
     }
   }

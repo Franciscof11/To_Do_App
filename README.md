@@ -53,10 +53,10 @@
 
 ```
 - Clone this repository:
-$ git clone https://github.com/Franciscof11/Pokedex.git Pokedex
+$ git clone https://github.com/Franciscof11/To_Do_App.git ToDoApp
 
 - Enter in directory:
-$ cd Pokedex
+$ cd ToDoApp
 
 - For install dependencies:
 $ flutter pub get

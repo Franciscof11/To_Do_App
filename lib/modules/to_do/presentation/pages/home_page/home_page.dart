@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
       floatingActionButton: Padding(
-        padding: const EdgeInsets.only(right: 30),
+        padding: const EdgeInsets.only(right: 30, bottom: 35),
         child: FloatingActionButton(
           onPressed: () async {
             Navigator.push(
@@ -150,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                 return Visibility(
                   visible: hasDoneTasks,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 26, bottom: 15),
+                    padding: const EdgeInsets.only(left: 45, bottom: 25),
                     child: GestureDetector(
                       onTap: () {
                         context.read<HomePageCubit>().deleteAllDoneTasks();
@@ -162,6 +162,7 @@ class _HomePageState extends State<HomePage> {
                             Icons.delete_forever_outlined,
                             color: Colors.red,
                           ),
+                          const SizedBox(width: 5),
                           Text(
                             'Deletar tarefas concluídas',
                             style: GoogleFonts.raleway(

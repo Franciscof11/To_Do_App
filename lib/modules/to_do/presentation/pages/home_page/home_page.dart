@@ -123,9 +123,6 @@ class _HomePageState extends State<HomePage> {
                   child: RefreshIndicator(
                     color: AppColors.mainGreen,
                     onRefresh: () async {
-                      for (var x in tasks) {
-                        print(x.toString());
-                      }
                       context.read<HomePageCubit>().getAllTasks();
                     },
                     child: MediaQuery.removePadding(

@@ -58,9 +58,6 @@ class AuthRepository {
       );
       if (context.mounted) Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      debugPrint('------------------------------------------');
-      debugPrint(e.code);
-
       if (context.mounted) {
         FocusScope.of(context).unfocus();
         Navigator.pop(context);

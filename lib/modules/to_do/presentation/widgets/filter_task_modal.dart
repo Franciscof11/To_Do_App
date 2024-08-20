@@ -110,7 +110,6 @@ class _FilterTaskModalState extends State<FilterTaskModal> {
                   onPressed: () {
                     widget.dialogContext.read<HomePageCubit>().filterTasksByStatus(filters: filters);
                     if (!doneTasks && !toDoTasks) {
-                      print('alo');
                       widget.dialogContext.read<HomePageCubit>().getAllTasks();
                     }
 

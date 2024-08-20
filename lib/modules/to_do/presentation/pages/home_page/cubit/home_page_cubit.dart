@@ -36,8 +36,6 @@ class HomePageCubit extends Cubit<HomePageState> {
 
       final taskId = await _repository.createTask(task: task);
 
-      print(taskId.toString());
-
       final taskToFirebase = Task(
         id: taskId,
         title: task.title,

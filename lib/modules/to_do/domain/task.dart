@@ -52,6 +52,13 @@ class Task {
     );
   }
 
+  factory Task.empty() => Task(
+        id: 0,
+        title: '',
+        status: 0,
+        description: '',
+      );
+
   String toJson() => json.encode(toMap());
 
   factory Task.fromJson(String source) => Task.fromMap(json.decode(source));

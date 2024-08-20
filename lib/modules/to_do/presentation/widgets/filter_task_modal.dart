@@ -23,7 +23,7 @@ class _FilterTaskModalState extends State<FilterTaskModal> {
       'toDoTasks': toDoTasks,
     };
     return Container(
-      height: MediaQuery.of(context).size.height * 0.8,
+      height: MediaQuery.of(context).size.height * 0.42,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -37,7 +37,7 @@ class _FilterTaskModalState extends State<FilterTaskModal> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
+              const SizedBox(height: 25),
               Text(
                 'Filtrar tarefas',
                 style: GoogleFonts.workSans(
@@ -46,7 +46,7 @@ class _FilterTaskModalState extends State<FilterTaskModal> {
                   fontSize: 22,
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 25),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -75,7 +75,7 @@ class _FilterTaskModalState extends State<FilterTaskModal> {
                   )
                 ],
               ),
-              const SizedBox(height: 25),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -104,7 +104,7 @@ class _FilterTaskModalState extends State<FilterTaskModal> {
                   )
                 ],
               ),
-              const SizedBox(height: 60),
+              const SizedBox(height: 40),
               Center(
                 child: ElevatedButton(
                   onPressed: () {
@@ -132,7 +132,7 @@ class _FilterTaskModalState extends State<FilterTaskModal> {
                   ),
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
             ],
           ),
         ),

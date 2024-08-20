@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 60),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: SearchWidget(
                 modal: BlocProvider(
                   create: (context) => HomePageCubit(repository: context.read<TaskRepository>()),

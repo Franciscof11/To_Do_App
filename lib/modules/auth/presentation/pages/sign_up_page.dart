@@ -24,7 +24,6 @@ class _SignUpPageState extends State<SignUpPage> {
   final confirmPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    double widthDevice = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
       body: RemoveGlowEffect(

@@ -56,7 +56,18 @@ class AuthRepository {
         email: email,
         password: password,
       );
-      if (context.mounted) Navigator.pop(context);
+      if (context.mounted) {
+        Navigator.push(
+          context,
+          PageTransition(
+            type: PageTransitionType.rightToLeft,
+            child: BlocProvider(
+              create: (context) => HomePageCubit(repository: context.read<TaskRepository>())..getAllTasks(),
+              child: const HomePage(),
+            ),
+          ),
+        );
+      }
     } on FirebaseAuthException catch (e) {
       if (context.mounted) {
         FocusScope.of(context).unfocus();

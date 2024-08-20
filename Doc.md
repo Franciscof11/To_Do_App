@@ -6,16 +6,16 @@ Ao decidir a arquitetura para o projeto, optei por implementar a Clean Architect
 # Bibliotecas Utilizadas
 
 - **bloc** -> Gerenciador de estado.
-- **dio** -> Pacote de rede para efetuar requisições http.
 - **freezed** -> Gerador de código para classes de estados e eventos do bloc.
-- **sqflite** -> Banco de dados SQL utilizado para armazenar dados na memória do aparelho.
+- **sqflite** -> Banco de dados SQL utilizado para realizar o cashe de dados na memória do aparelho.
+- **firebase_core** -> Utilização dos recursos do Firebase.
 - **google_fonts** -> Utilização de fontes nativa do Google.
 - **flutter_launcher_icons** -> Customização e configuração do ícone do applicativo.
 - **flutter_native_splash** -> Criação da Splash Screen nativa do aplicativo.
 - **device_preview** -> Testes em diversos tamanhos de tela, para melhor responsividade para a aplicação.
 - **bloc_test** -> Biblioteca usada para escrever e executar testes unitários quanto ao bloc.
 - **mocktail** -> Biblioteca utilizada para mockar serviços http e de banco de dados para os testes.
-
+- **shared_preferences** -> Biblioteca utilizada para persistir dados de pequeno porte.
 
 
 # Documentação da Arquitetura

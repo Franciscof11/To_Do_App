@@ -78,7 +78,7 @@ class TaskListTile extends StatelessWidget {
                       context: context,
                       builder: (modalContext) {
                         return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 220),
+                          padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 210),
                           child: Dialog(
                             backgroundColor: Colors.white,
                             child: Padding(
@@ -112,7 +112,7 @@ class TaskListTile extends StatelessWidget {
                                             'Cancelar',
                                             style: GoogleFonts.raleway(
                                               color: Colors.white,
-                                              fontSize: 20,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.w600,
                                             ),
                                           ),
@@ -152,7 +152,7 @@ class TaskListTile extends StatelessWidget {
                                             'Excluir',
                                             style: GoogleFonts.raleway(
                                               color: Colors.white,
-                                              fontSize: 20,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.w600,
                                             ),
                                           ),

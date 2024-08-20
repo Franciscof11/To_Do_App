@@ -151,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                 return Visibility(
                   visible: hasDoneTasks,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 45, bottom: 25),
+                    padding: const EdgeInsets.only(left: 45, bottom: 25, top: 25),
                     child: GestureDetector(
                       onTap: () {
                         context.read<HomePageCubit>().deleteAllDoneTasks();

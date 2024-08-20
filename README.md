@@ -1,7 +1,7 @@
 <h2 align="center">Pokedex<h2>
 <p align="center">
-    <img src="https://i.imgur.com/IWemIGb.png" width="350" height="350" alt="App Banner" />
-</p>
+    <img src="https://i.imgur.com/CX7NO3i.png" width="350" height="350" alt="App Banner" />
+</p> 
 
    <h2>Topics 📋</h2>
 
@@ -16,7 +16,7 @@
    <h2>About 📖</h2>
    
    <p>
-    O projeto simula uma Pokédex onde você pode listar pokémons, ver detalhes completos de cada um, como características, habilidades e estatísticas. Com uma interface intuitiva, o aplicativo oferece uma experiência imersiva, incluindo busca por tipos específicos de cada pokémon, junto de um sistema de cache para respostas http, oque torna o app mais rápido e fluido. No arquivo "Doc.md" na pasta raiz do projeto, está toda a documentação de desenvolvimento e arquitetura do aplicativo.
+    Conheça o To Do App, o aplicativo ideal para gerenciar suas tarefas diárias! Com ele você pode criar, editar, excluir e filtrar suas tarefas de forma simples e prática. Aproveite o armazenamento local com SQLite para acesso offline e a sincronização com o banco de dados na nuvem via Firestore para manter suas tarefas sempre atualizadas em qualquer dispositivo, junto da autenticação completa disponibilizada pelo Firebase.  No arquivo "Doc.md" na pasta raiz do projeto, está toda a documentação de desenvolvimento e arquitetura do aplicativo.
    </p>
 
 ---

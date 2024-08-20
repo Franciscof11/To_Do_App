@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:to_do_app/modules/to_do/data/task_repository.dart';
-import 'package:to_do_app/modules/to_do/presentation/pages/home_page/cubit/home_page_cubit.dart';
-import 'package:to_do_app/modules/to_do/presentation/pages/home_page/home_page.dart';
+import 'package:to_do_app/modules/auth/presentation/pages/sign_in_page.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/introduction_pages/intro_page_1.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/introduction_pages/intro_page_2.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/introduction_pages/intro_page_3.dart';
@@ -58,7 +55,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   children: [
                     TextButton(
                       onPressed: () {
-                        _controller.jumpToPage(1);
+                        _controller.jumpToPage(2);
                       },
                       child: Text(
                         'Pular',
@@ -89,10 +86,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                   context,
                                   PageTransition(
                                     type: PageTransitionType.leftToRight,
-                                    child: BlocProvider(
-                                      create: (context) => HomePageCubit(repository: context.read<TaskRepository>())..getAllTasks(),
-                                      child: const HomePage(),
-                                    ),
+                                    child: const SignInPage(),
                                   ),
                                 );
                               }

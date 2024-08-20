@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:to_do_app/modules/auth/data/auth_repository.dart';
+import 'package:to_do_app/modules/auth/presentation/pages/sign_in_page.dart';
 import 'package:to_do_app/utils/app_colors.dart';
 
 import '../../../../utils/remove_glow_effect.dart';
@@ -47,6 +49,13 @@ class HomeDrawer extends StatelessWidget {
                 final authRepository = AuthRepository();
 
                 authRepository.signOut();
+
+                Navigator.push(
+                    context,
+                    PageTransition(
+                      child: const SignInPage(),
+                      type: PageTransitionType.leftToRight,
+                    ));
               },
               child: Row(
                 children: [

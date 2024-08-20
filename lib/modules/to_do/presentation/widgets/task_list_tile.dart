@@ -186,14 +186,34 @@ class TaskListTile extends StatelessWidget {
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(12)),
-            color: taskIsDone ? Colors.green : Theme.of(context).colorScheme.secondary,
+            color: taskIsDone ? Colors.green : Colors.white24,
           ),
           child: ListTile(
-            title: Text(
-              task.title,
-              style: GoogleFonts.inter(
-                color: Theme.of(context).colorScheme.inversePrimary,
-              ),
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  task.title,
+                  style: GoogleFonts.raleway(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    decoration: taskIsDone ? TextDecoration.lineThrough : TextDecoration.none,
+                  ),
+                ),
+                if (task.description != '')
+                  Text(
+                    task.description,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.raleway(
+                      color: Colors.white60,
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      decoration: taskIsDone ? TextDecoration.lineThrough : TextDecoration.none,
+                    ),
+                  ),
+              ],
             ),
             trailing: Checkbox(
               activeColor: Colors.white,

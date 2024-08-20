@@ -47,8 +47,8 @@ A Clean Architecture é uma abordagem de design de software proposta por Robert 
 
 Nesse projeto, optei pela utilização das 3 camadas, onde:
 
-**Data:** Possui todos os arquivos de repositórios, os quais fazem requisições à serviços externos como a api disponibilizada.
+**Data:** Possui todos os arquivos de repositórios, os quais fazem requisições à serviços externos.
 
-**Domain:** Contém o arquivo de modelagem dos dados das entidades. Também responsável pela serialização e desserialização dos objetos
+**Domain:** Contém o arquivo de modelagem dos dados das entidades. Também responsável pela serialização e desserialização dos objetos.
 
 **Presentation:** Camada responsável por armazenar toda a parte da UI do projeto, telas e arquivos bloc. Cada pasta possui sua tela e pasta bloc com seus respectivos arquivos do gerenciamento de estado. 

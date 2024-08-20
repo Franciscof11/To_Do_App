@@ -7,12 +7,11 @@ import 'package:to_do_app/modules/to_do/domain/task.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/create_task_page/create_task_page.dart';
 import 'package:to_do_app/modules/to_do/presentation/pages/home_page/cubit/home_page_cubit.dart';
 import 'package:to_do_app/modules/to_do/presentation/widgets/filter_task_modal.dart';
+import 'package:to_do_app/modules/to_do/presentation/widgets/home_drawer.dart';
 import 'package:to_do_app/modules/to_do/presentation/widgets/loader.dart';
 import 'package:to_do_app/modules/to_do/presentation/widgets/search_widget.dart';
 import 'package:to_do_app/modules/to_do/presentation/widgets/task_list_tile.dart';
 import 'package:to_do_app/utils/app_colors.dart';
-
-import '../../../../auth/data/auth_repository.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,8 +23,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: Colors.grey.shade900,
+      drawer: const HomeDrawer(),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(right: 30, bottom: 35),
         child: FloatingActionButton(
@@ -57,9 +60,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    final _authRepository = AuthRepository();
-
-                    _authRepository.signOut();
+                    scaffoldKey.currentState?.openDrawer();
                   },
                   child: Icon(
                     Icons.menu,

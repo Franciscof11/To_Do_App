@@ -50,9 +50,18 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  CustomTextField(label: 'Email', controller: emailController),
+                  CustomTextField(
+                    key: const Key('email'),
+                    label: 'Email',
+                    controller: emailController,
+                  ),
                   const SizedBox(height: 16),
-                  CustomTextField(label: 'Senha', isSecret: true, controller: passwordController),
+                  CustomTextField(
+                    key: const Key('password'),
+                    label: 'Senha',
+                    isSecret: true,
+                    controller: passwordController,
+                  ),
                   const SizedBox(height: 10),
                   Align(
                     alignment: Alignment.centerRight,
@@ -67,6 +76,7 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   const SizedBox(height: 35),
                   ElevatedButton(
+                    key: const Key('signInButton'),
                     onPressed: () {
                       final formValid = formKey.currentState?.validate() ?? false;
                       if (formValid) {

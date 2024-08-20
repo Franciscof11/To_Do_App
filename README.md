@@ -1,4 +1,4 @@
-<h2 align="center">Pokedex<h2>
+<h2 align="center">To Do App<h2>
 <p align="center">
     <img src="https://i.imgur.com/CX7NO3i.png" width="350" height="350" alt="App Banner" />
 </p> 

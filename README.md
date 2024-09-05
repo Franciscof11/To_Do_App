@@ -16,7 +16,7 @@
    <h2>About 📖</h2>
    
    <p>
-    Conheça o To Do App, o aplicativo ideal para gerenciar suas tarefas diárias! Com ele você pode criar, editar, excluir e filtrar suas tarefas de forma simples e prática. Aproveite o armazenamento local com SQLite para acesso offline e a sincronização com o banco de dados na nuvem via Firestore para manter suas tarefas sempre atualizadas em qualquer dispositivo, junto da autenticação completa disponibilizada pelo Firebase.  No arquivo "Doc.md" na pasta raiz do projeto, está toda a documentação de desenvolvimento e arquitetura do aplicativo.
+    Meet To Do App, the ideal app for managing your daily tasks! With it, you can create, edit, delete, and filter your tasks in a simple and practical way. Take advantage of local storage with SQLite for offline access and synchronization with the cloud database via Firestore to keep your tasks always up to date on any device, along with full authentication provided by Firebase. The "Doc.md" file in the project root folder contains all the development and architecture documentation for the application.
    </p>
 
 ---
@@ -35,17 +35,17 @@
    Technologies Used 👨🏽‍💻
    </h2>
    
-- **bloc** -> Gerenciador de estado.
-- **freezed** -> Gerador de código para classes de estados e eventos do bloc.
-- **sqflite** -> Banco de dados SQL utilizado para realizar o cashe de dados na memória do aparelho.
-- **firebase_core** -> Utilização dos recursos do Firebase.
-- **google_fonts** -> Utilização de fontes nativa do Google.
-- **flutter_launcher_icons** -> Customização e configuração do ícone do applicativo.
-- **flutter_native_splash** -> Criação da Splash Screen nativa do aplicativo.
-- **device_preview** -> Testes em diversos tamanhos de tela, para melhor responsividade para a aplicação.
-- **bloc_test** -> Biblioteca usada para escrever e executar testes unitários quanto ao bloc.
-- **mocktail** -> Biblioteca utilizada para mockar serviços http e de banco de dados para os testes.
-- **shared_preferences** -> Biblioteca utilizada para persistir dados de pequeno porte.
+- **bloc** -> State manager.
+- **freezed** -> Code generator for bloc state and event classes.
+- **sqflite** -> SQL database used to cache data in the device's memory.
+- **firebase_core** -> Using Firebase features.
+- **google_fonts** -> Use of native Google fonts.
+- **flutter_launcher_icons** -> Customizing and configuring the application icon.
+- **flutter_native_splash** -> Creation of the application's native Splash Screen.
+- **device_preview** -> Tests on different screen sizes, for better responsiveness for the application.
+- **bloc_test** -> Library used to write and run unit tests for bloc.
+- **mocktail** -> Library used to mock http and database services for testing.
+- **shared_preferences** -> Library used to persist small data.
 
   
 ---
